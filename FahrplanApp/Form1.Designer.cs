@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.groupBoxSearchInputs = new System.Windows.Forms.GroupBox();
-            this.txtTo = new System.Windows.Forms.TextBox();
-            this.txtFrom = new System.Windows.Forms.TextBox();
             this.btnChangeFromAndTo = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.txtTime = new System.Windows.Forms.TextBox();
@@ -43,6 +41,8 @@
             this.listViewConnections = new System.Windows.Forms.ListView();
             this.groupBoxDetails = new System.Windows.Forms.GroupBox();
             this.listViewDetailedConnection = new System.Windows.Forms.ListView();
+            this.cbxFrom = new System.Windows.Forms.ComboBox();
+            this.cbxTo = new System.Windows.Forms.ComboBox();
             this.groupBoxSearchInputs.SuspendLayout();
             this.groupBoxConnections.SuspendLayout();
             this.groupBoxDetails.SuspendLayout();
@@ -50,8 +50,8 @@
             // 
             // groupBoxSearchInputs
             // 
-            this.groupBoxSearchInputs.Controls.Add(this.txtTo);
-            this.groupBoxSearchInputs.Controls.Add(this.txtFrom);
+            this.groupBoxSearchInputs.Controls.Add(this.cbxTo);
+            this.groupBoxSearchInputs.Controls.Add(this.cbxFrom);
             this.groupBoxSearchInputs.Controls.Add(this.btnChangeFromAndTo);
             this.groupBoxSearchInputs.Controls.Add(this.label4);
             this.groupBoxSearchInputs.Controls.Add(this.txtTime);
@@ -66,24 +66,6 @@
             this.groupBoxSearchInputs.TabIndex = 0;
             this.groupBoxSearchInputs.TabStop = false;
             this.groupBoxSearchInputs.Text = "Verbindungen suchen";
-            // 
-            // txtTo
-            // 
-            this.txtTo.Location = new System.Drawing.Point(338, 59);
-            this.txtTo.Name = "txtTo";
-            this.txtTo.Size = new System.Drawing.Size(188, 22);
-            this.txtTo.TabIndex = 11;
-            // 
-            // txtFrom
-            // 
-            this.txtFrom.AllowDrop = true;
-            this.txtFrom.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.txtFrom.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.HistoryList;
-            this.txtFrom.Location = new System.Drawing.Point(6, 59);
-            this.txtFrom.Name = "txtFrom";
-            this.txtFrom.Size = new System.Drawing.Size(188, 22);
-            this.txtFrom.TabIndex = 10;
-            this.txtFrom.TextChanged += new System.EventHandler(this.txtFrom_TextChanged);
             // 
             // btnChangeFromAndTo
             // 
@@ -197,6 +179,24 @@
             this.listViewDetailedConnection.TabIndex = 0;
             this.listViewDetailedConnection.UseCompatibleStateImageBehavior = false;
             // 
+            // cbxFrom
+            // 
+            this.cbxFrom.FormattingEnabled = true;
+            this.cbxFrom.Location = new System.Drawing.Point(6, 59);
+            this.cbxFrom.Name = "cbxFrom";
+            this.cbxFrom.Size = new System.Drawing.Size(188, 24);
+            this.cbxFrom.TabIndex = 10;
+            this.cbxFrom.TextUpdate += new System.EventHandler(this.cbxFrom_TextUpdate);
+            // 
+            // cbxTo
+            // 
+            this.cbxTo.FormattingEnabled = true;
+            this.cbxTo.Location = new System.Drawing.Point(338, 59);
+            this.cbxTo.Name = "cbxTo";
+            this.cbxTo.Size = new System.Drawing.Size(188, 24);
+            this.cbxTo.TabIndex = 11;
+            this.cbxTo.TextUpdate += new System.EventHandler(this.cbxTo_TextUpdate);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -231,8 +231,8 @@
         private System.Windows.Forms.GroupBox groupBoxDetails;
         private System.Windows.Forms.ListView listViewConnections;
         private System.Windows.Forms.ListView listViewDetailedConnection;
-        private System.Windows.Forms.TextBox txtTo;
-        private System.Windows.Forms.TextBox txtFrom;
+        private System.Windows.Forms.ComboBox cbxTo;
+        private System.Windows.Forms.ComboBox cbxFrom;
     }
 }
 
