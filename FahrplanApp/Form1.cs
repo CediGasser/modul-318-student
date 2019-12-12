@@ -25,7 +25,7 @@ namespace FahrplanApp
         {
             if (cbxFrom.Text != String.Empty && cbxTo.Text != String.Empty && txtTime.Text != String.Empty && dateTimePicker.Value != null)
             {
-
+                Connections
             }
         }
 
@@ -34,62 +34,25 @@ namespace FahrplanApp
         {
             txtTime.Text = DateTime.Now.ToString().Substring(11, 5);
             transport = new Transport();
-            
         }
         private void btnChangeFromAndTo_Click(object sender, EventArgs e)
         {
             string to = cbxTo.Text;
             cbxTo.Text = cbxFrom.Text;
             cbxFrom.Text = to;
+            ShowStationSuggestionsInItems(cbxFrom);
+            ShowStationSuggestionsInItems(cbxTo);
         }
         private void cbxFrom_TextUpdate(object sender, EventArgs e)
         {
-            if (cbxFrom.Text.Length > 1)
-            {
-                try
-                {
-                    cbxFrom.DroppedDown = true;
-                    Cursor.Current = Cursors.Default;
-
-                    for (int i = cbxFrom.Items.Count - 1; i >= 0; i--)
-                        cbxFrom.Items.RemoveAt(i);
-
-                    var stations = transport.GetStations(cbxFrom.Text).StationList;
-                    {
-                        for (int n = 0; n < stations.Count - 1; n++)
-                            if (stations[n].Name != null)
-                                cbxFrom.Items.Add(stations[n].Name);
-                    }
-                }
-                catch { }
-            }
+            ShowStationSuggestionsInItems(cbxFrom);
         }
         private void cbxTo_TextUpdate(object sender, EventArgs e)
         {
-            if (cbxTo.Text.Length > 1)
-            {
-                try
-                {
-                    cbxTo.DroppedDown = true;
-                    Cursor.Current = Cursors.Default;
-
-                    for (int i = cbxTo.Items.Count - 1; i >= 0; i--)
-                        cbxTo.Items.RemoveAt(i);
-
-                    var stations = transport.GetStations(cbxTo.Text).StationList;
-                    {
-                        for (int n = 0; n < stations.Count - 1; n++)
-                            if (stations[n].Name != null)
-                                cbxTo.Items.Add(stations[n].Name);
-                    }
-                }
-                catch { }
-            }
+            ShowStationSuggestionsInItems(cbxTo);
         }
-
-        private void ShowStationSuggestions(object sender)
+        private void ShowStationSuggestionsInItems(ComboBox comboBox)
         {
-            var comboBox = sender as ComboBox;
             if (comboBox.Text.Length > 1)
             {
                 try
