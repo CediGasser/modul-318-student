@@ -46,6 +46,7 @@
             this.rbtnStationMap = new System.Windows.Forms.RadioButton();
             this.rbtnStationBoard = new System.Windows.Forms.RadioButton();
             this.rbtnConnections = new System.Windows.Forms.RadioButton();
+            this.gMapStationMap = new GMap.NET.WindowsForms.GMapControl();
             this.groupBoxSearchInputs.SuspendLayout();
             this.groupBoxConnections.SuspendLayout();
             this.groupBoxFunction.SuspendLayout();
@@ -68,7 +69,7 @@
             this.groupBoxSearchInputs.Size = new System.Drawing.Size(537, 164);
             this.groupBoxSearchInputs.TabIndex = 0;
             this.groupBoxSearchInputs.TabStop = false;
-            this.groupBoxSearchInputs.Text = "Verbindungen suchen";
+            this.groupBoxSearchInputs.Text = "Suchen";
             // 
             // cbxTo
             // 
@@ -167,6 +168,7 @@
             // groupBoxConnections
             // 
             this.groupBoxConnections.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBoxConnections.Controls.Add(this.gMapStationMap);
             this.groupBoxConnections.Controls.Add(this.listViewConnections);
             this.groupBoxConnections.Location = new System.Drawing.Point(12, 182);
             this.groupBoxConnections.Name = "groupBoxConnections";
@@ -233,6 +235,33 @@
             this.rbtnConnections.UseVisualStyleBackColor = true;
             this.rbtnConnections.Click += new System.EventHandler(this.rbtnConnections_Click);
             // 
+            // gMapStationMap
+            // 
+            this.gMapStationMap.Bearing = 0F;
+            this.gMapStationMap.CanDragMap = true;
+            this.gMapStationMap.EmptyTileColor = System.Drawing.Color.Navy;
+            this.gMapStationMap.GrayScaleMode = false;
+            this.gMapStationMap.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
+            this.gMapStationMap.LevelsKeepInMemmory = 5;
+            this.gMapStationMap.Location = new System.Drawing.Point(6, 21);
+            this.gMapStationMap.MarkersEnabled = true;
+            this.gMapStationMap.MaxZoom = 18;
+            this.gMapStationMap.MinZoom = 2;
+            this.gMapStationMap.MouseWheelZoomEnabled = true;
+            this.gMapStationMap.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+            this.gMapStationMap.Name = "gMapStationMap";
+            this.gMapStationMap.NegativeMode = false;
+            this.gMapStationMap.PolygonsEnabled = true;
+            this.gMapStationMap.RetryLoadTile = 0;
+            this.gMapStationMap.RoutesEnabled = true;
+            this.gMapStationMap.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
+            this.gMapStationMap.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
+            this.gMapStationMap.ShowTileGridLines = false;
+            this.gMapStationMap.Size = new System.Drawing.Size(674, 355);
+            this.gMapStationMap.TabIndex = 8;
+            this.gMapStationMap.Visible = false;
+            this.gMapStationMap.Zoom = 16D;
+            // 
             // FahrplanApp
             // 
             this.AcceptButton = this.btnSearchConnections;
@@ -274,6 +303,7 @@
         private System.Windows.Forms.RadioButton rbtnStationMap;
         private System.Windows.Forms.RadioButton rbtnStationBoard;
         private System.Windows.Forms.RadioButton rbtnConnections;
+        private GMap.NET.WindowsForms.GMapControl gMapStationMap;
     }
 }
 

@@ -15,6 +15,8 @@ namespace FahrplanApp
     public partial class FahrplanApp : Form
     {
         private Transport transport;
+        private object stationList;
+
         public FahrplanApp()
         {
             InitializeComponent();
@@ -41,11 +43,31 @@ namespace FahrplanApp
             }
             else if(rbtnStationMap.Checked && !String.IsNullOrEmpty(cbxFrom.Text))
             {
-
+                try
+                {
+                    ShowStationMap(cbxFrom.Text);
+                }
+                catch { MessageBox.Show("Ihre Eingaben sind ungültig"); }
             }
         }
         
-
+        private void ShowStationMap(string from)
+        {
+            var station = transport.GetStations(from).StationList[0];
+            if (station.Id != null)
+            {
+                double x = station.Coordinate.XCoordinate;
+                double y = station.Coordinate.YCoordinate;
+                gMapStationMap.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
+                GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
+                gMapStationMap.Position = new GMap.NET.PointLatLng(x, y);
+                
+            }
+            else
+            {
+                MessageBox.Show("Ort nicht gefunden");
+            }
+        }
         private void ShowStationBoard(string from)
         {
             var stationBoard = transport.GetStationBoard(from, "").Entries;
@@ -91,6 +113,7 @@ namespace FahrplanApp
             transport = new Transport();
             rbtnConnections_Click(rbtnConnections, null);
             this.AcceptButton = btnSearchConnections;
+            gMapStationMap.ShowCenter = false;
         }
 
         private void btnChangeFromAndTo_Click(object sender, EventArgs e)
@@ -155,22 +178,21 @@ namespace FahrplanApp
             listViewConnections.Columns.Add("Zeit", 44);
             listViewConnections.Columns.Add("Nach", 175);
             listViewConnections.Columns.Add("Dauer", 64);
+
+            gMapStationMap.Visible = false;
+            groupBoxConnections.Text = "Verbindungen";
         }
 
         private void rbtnStationBoard_Click(object sender, EventArgs e)
         {
             lblFrom.Visible = true;
             cbxFrom.Visible = true;
-
             lblTo.Visible = false;
             cbxTo.Visible = false;
-
             lblTime.Visible = false;
             txtTime.Visible = false;
-
             lblDateTimePicker.Visible = false;
             dateTimePicker.Visible = false;
-
             btnChangeFromAndTo.Visible = false;
             listViewConnections.Enabled = true;
 
@@ -182,6 +204,8 @@ namespace FahrplanApp
             listViewConnections.Columns.Add("Name", 80);
             listViewConnections.Columns.Add("Betreiber", 55);
 
+            gMapStationMap.Visible = false;
+            groupBoxConnections.Text = "Abfahrtsplan";
         }
 
         private void rbtnStationMap_Click(object sender, EventArgs e)
@@ -199,6 +223,9 @@ namespace FahrplanApp
             listViewConnections.Enabled = false;
             listViewConnections.Items.Clear();
             listViewConnections.Columns.Clear();
+
+            gMapStationMap.Visible = true;
+            groupBoxConnections.Text = "Karte";
         }
     }
 }
